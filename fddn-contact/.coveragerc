@@ -1,0 +1,3 @@
+[run]
+source = fddn_contact
+omit = fddn_contact/test*
