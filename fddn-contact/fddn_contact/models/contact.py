@@ -7,10 +7,11 @@ from sqlalchemy import (
 
 from .meta import Base
 
-
 class Contact(Base):
-    pass
-
+    __tablename__ = 'contacts'
+    id = Column(Integer)
+    user_id = Column(Integer)
+    ContactName = Column(string)
 
 class ContactInfoItem(Base):
-    pass
+    pass:
