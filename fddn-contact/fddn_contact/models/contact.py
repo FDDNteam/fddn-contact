@@ -26,4 +26,4 @@ class ContactInfoItem(Base):
 
 
 Index('contact_info_item_contact_id_idx', ContactInfoItem.contact_id)
-Index('contact_user_id_idx', ContactInfoItem.contact_id)
+Index('contact_user_id_idx', Contact.user_id, unique=True)
