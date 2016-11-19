@@ -3,9 +3,11 @@ from sqlalchemy import (
     Index,
     Integer,
     Text,
+    ForeignKey,
 )
 
 from .meta import Base
+
 
 class Contact(Base):
     __tablename__ = 'contact'
@@ -17,6 +19,6 @@ class Contact(Base):
 class ContactInfoItem(Base):
     __tablename__ = 'contact_info_item'
     id = Column(Integer)
-    contact_id = Column(Integer)
+    contact_id = Column(Integer, ForeignKey('contact.id'))
     key = Column(Integer)
     value = Column(Text)
