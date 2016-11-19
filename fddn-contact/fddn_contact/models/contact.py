@@ -23,6 +23,7 @@ class ContactInfoItem(Base):
     contact_id = Column(Integer, ForeignKey('contact.id'), nullable=False)
     key = Column(Unicode(20))
     value = Column(Text)
+    index = Column(Integer)
 
 
 Index('contact_info_item_contact_id_idx', ContactInfoItem.contact_id)
