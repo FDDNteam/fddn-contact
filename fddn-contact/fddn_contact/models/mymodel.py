@@ -15,4 +15,7 @@ class MyModel(Base):
     value = Column(Integer)
 
 
+
+
+
 Index('my_index', MyModel.name, unique=True, mysql_length=255)
