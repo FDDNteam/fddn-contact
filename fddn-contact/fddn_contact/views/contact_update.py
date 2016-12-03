@@ -3,7 +3,7 @@ from pyramid.view import view_config
 from ..models import Contact, ContactInfoItem
 
 
-@view_config(route_name='home', renderer='json')
+@view_config(route_name='update', renderer='json')
 def contact_update_view(request):
     contact_data = request.json_body
 
