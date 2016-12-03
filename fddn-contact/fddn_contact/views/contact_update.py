@@ -16,14 +16,12 @@ def contact_update_view(request):
         .query(Contact)\
         .filter(Contact.id == contact_data['id'])\
         .update({Contact.name: contact_data['name']})
-    i=0
-    for item_data in contact_data['items']:
+    for i, item_data in enumerate(contact_data['items']):
         item = ContactInfoItem()
         item.contact_id = contact_data['id']
         item.key = item_data['key']
         item.value = item_data['value']
         item.index = i
-        i += 1
         request.dbsession.add(item)
 
     return {"result":"OK"}
