@@ -77,6 +77,8 @@ def contact_set(request):
             .query(ContactInfoItem) \
             .filter(ContactInfoItem.contact_id == contact_id) \
             .delete()
+
+        return {'result': 'ok'}
     else:
         return {'result': 'failed'}
 
