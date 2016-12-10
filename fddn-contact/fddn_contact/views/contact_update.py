@@ -35,7 +35,7 @@ def contact_set(request):
 
         for i, item_data in enumerate(contact_data['items']):
             item = ContactInfoItem()
-            item.contact_id = contact_data['id']
+            item.contact_id = contact.id
             item.key = item_data['key']
             item.value = item_data['value']
             item.index = i
