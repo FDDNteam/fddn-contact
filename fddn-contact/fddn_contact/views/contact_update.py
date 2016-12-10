@@ -20,13 +20,15 @@ def contact_update_view(request):
             .query(ContactInfoItem)\
             .filter(ContactInfoItem.contact_id == contact_data['id'])\
             .delete()
-    else:
-        pass
 
-    request.dbsession\
-        .query(Contact)\
-        .filter(Contact.id == contact_data['id'])\
-        .update({Contact.name: contact_data['name']})
+        request.dbsession \
+            .query(Contact) \
+            .filter(Contact.id == contact_data['id']) \
+            .update({Contact.name: contact_data['name']})
+    else:
+        contact = Contact()
+        contact.name = contact_data['name']
+        request.dbsession.add(contact)
 
     for i, item_data in enumerate(contact_data['items']):
         item = ContactInfoItem()
