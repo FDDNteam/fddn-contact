@@ -65,6 +65,18 @@ def contact_set(request):
                           'value': item.value,
                       } for item in items]
         }
+    elif request.method == 'DELETE':
+        contact_id = request.params['id']
+
+        request.dbsession \
+            .query(Contact) \
+            .filter(Contact.id == contact_id) \
+            .delete()
+
+        request.dbsession \
+            .query(ContactInfoItem) \
+            .filter(ContactInfoItem.contact_id == contact_id) \
+            .delete()
     else:
         return {'result': 'failed'}
 
