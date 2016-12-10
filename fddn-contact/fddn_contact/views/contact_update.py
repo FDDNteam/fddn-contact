@@ -8,10 +8,10 @@ def contact_set(request):
     if request.method == 'POST':
         contact_data = request.json_body
 
-        if 'id' in contact_data:
+        if request.matchdict['id'] != 'create':
             contact = request.dbsession \
                 .query(Contact) \
-                .filter(Contact.id == contact_data['id']) \
+                .filter(Contact.id == request.matchdict['id']) \
                 .first()
 
             if contact is None:
@@ -19,12 +19,12 @@ def contact_set(request):
 
             request.dbsession\
                 .query(ContactInfoItem)\
-                .filter(ContactInfoItem.contact_id == contact_data['id'])\
+                .filter(ContactInfoItem.contact_id == request.matchdict['id'])\
                 .delete()
 
             request.dbsession \
                 .query(Contact) \
-                .filter(Contact.id == contact_data['id']) \
+                .filter(Contact.id == request.matchdict['id']) \
                 .update({Contact.name: contact_data['name']})
         else:
             contact = Contact()
@@ -43,7 +43,7 @@ def contact_set(request):
 
         return {'result': 'ok', 'id': contact.id}
     elif request.method == 'GET':
-        contact_id = request.params['id']
+        contact_id = request.matchdict['id']
         contact = request.dbsession \
             .query(Contact) \
             .filter(Contact.id == contact_id) \
@@ -66,7 +66,7 @@ def contact_set(request):
                       } for item in items]
         }
     elif request.method == 'DELETE':
-        contact_id = request.params['id']
+        contact_id = request.matchdict['id']
 
         request.dbsession \
             .query(Contact) \
